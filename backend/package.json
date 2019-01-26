@@ -1,0 +1,18 @@
+{
+  "name": "rubets",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint src"
+  },
+  "dependencies": {
+    "apollo-server": "^2.3.2",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  }
+}
