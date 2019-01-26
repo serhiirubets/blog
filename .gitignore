@@ -1,20 +1,4 @@
-Skip to content
- 
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- @serhiirubets Sign out
-0
-0 0 serhiirubets/react-apollo-recipes
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-react-apollo-recipes/.gitignore
-5e6bf9e  14 hours ago
- serhii.rubets Project was done
-     
-68 lines (48 sloc)  993 Bytes
 # Logs
 logs
 *.log
@@ -54,10 +38,8 @@ backend/node_modules/
 client/node_modules/
 backend/.env
 node_modules/
-jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
+
 
 # Optional npm cache directory
 .npm
