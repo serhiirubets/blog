@@ -1,0 +1,14 @@
+$blue1: #2196f3;
+
+.appBar {
+  background: $blue1;
+  color: $blue1;
+
+  .link {
+    color: white;
+  }
+}
+
+.toolBar {
+  justify-content: center;
+}
