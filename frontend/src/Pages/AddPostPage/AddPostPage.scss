@@ -1,14 +1,24 @@
 .form {
   width: 400px;
   margin: auto;
-}
+  padding-top: 50px;
+  padding-bottom: 50px;
 
-.input {
-  width: 100%;
+  .input {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 }
 
 .editor {
   margin-bottom: 10px;
+}
+
+.file {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .inputFile {
@@ -18,4 +28,23 @@
 
 .uploadButtonText {
   margin-left: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin: auto;
+}
+
+.uploadedPicture {
+  max-width: 200px;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.error {
+  color: red;
 }

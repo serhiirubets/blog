@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true
   },
@@ -10,21 +10,21 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
+  text: {
     type: String,
     required: true
   },
-
   likes: {
     type: Number,
     default: 0
   },
-  username: {
-    type: String
-  },
   imageUrl: {
     type: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
 
-module.exports = mongoose.model('Recipe', PostSchema)
+module.exports = mongoose.model('Post', PostSchema)

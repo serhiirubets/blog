@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 mongoose
   .connect(
-    process.env.DB_URL,
+    process.env.MONGOOSE_LOCAL,
     { useNewUrlParser: true }
   )
   .then(() => console.log('DB connected'))

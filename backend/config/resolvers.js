@@ -1,8 +1,12 @@
 const authResolvers = require('../resolvers/auth')
+const postResovers = require('../resolvers/post')
 
 exports.resolvers = {
-  Query: {},
+  Query: {
+    ...postResovers.queries
+  },
   Mutation: {
-    ...authResolvers
+    ...authResolvers,
+    ...postResovers.mutations
   }
 }

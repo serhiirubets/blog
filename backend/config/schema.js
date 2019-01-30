@@ -1,10 +1,10 @@
 exports.typeDefs = `
   type Post {
     id: ID
-    name: String!
-    imageUrl: String
+    title: String!
+    imageUrl: String!
     category: String!
-    description: String!
+    text: String!
     likes: Int
     views: Int
   }
@@ -23,11 +23,12 @@ exports.typeDefs = `
 
   type Query {
     getCurrentUser: User
+    getPosts: [Post]
   }
 
   type Mutation {
-    addPost(name: String!, imageUrl: String!, description: String!, category: String!, username: String): Post
-    updatePost(id: ID!, name: String!, imageUrl: String!, description: String!, category: String!): Post
+    addPost(title: String!, imageUrl: String, text: String!, category: String!, username: String): Post
+    updatePost(id: ID!, title: String!, imageUrl: String!, description: String!, category: String!): Post
     likePost(id: ID!): Post
     unlikePost(id: ID!): Post
     signupUser(username: String!, email: String!, password: String!): Token

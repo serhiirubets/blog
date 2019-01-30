@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Card from "@material-ui/core/Card";
 
 import { Link } from "react-router-dom";
-
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 
 import styles from "./Post.scss";
 
@@ -25,6 +23,11 @@ const Post = ({ imageUrl, name, category, date, id }) => (
   </Card>
 );
 
-Post.propTypes = {};
+Post.propTypes = {
+  name: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  data: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string
+};
 
 export { Post };
