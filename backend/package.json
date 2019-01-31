@@ -14,6 +14,7 @@
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.4",
+    "graphql-upload": "^8.0.4",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.6"
   },

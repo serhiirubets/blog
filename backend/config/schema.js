@@ -1,4 +1,14 @@
-exports.typeDefs = `
+
+const { gql } = require('apollo-server-express')
+
+exports.typeDefs = gql`
+   type File {
+    id: ID!
+    path: String!
+    filename: String!
+    mimetype: String!
+  }
+
   type Post {
     id: ID
     title: String!
@@ -34,5 +44,7 @@ exports.typeDefs = `
     signupUser(username: String!, email: String!, password: String!): Token
     signinUser(email: String!, password: String!): Token
     deletePost(_id: ID!): Post
+
+    singleUpload(file: Upload!): File!
   }
 `

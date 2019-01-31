@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const { graphqlUploadExpress } = require('graphql-upload')
 
 const { ApolloServer } = require('apollo-server-express')
 
@@ -25,7 +26,7 @@ app.use(
   })
 )
 
-app.use('/graphql', bodyParser.json())
+app.use('/graphql', bodyParser.json(), graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }))
 
 // Set up JWT authentication middleware
 app.use(async (req, res, next) => {
@@ -45,6 +46,14 @@ app.use(async (req, res, next) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  uploads: {
+    // Limits here should be stricter than config for surrounding
+    // infrastructure such as Nginx so errors can be handled elegantly by
+    // graphql-upload:
+    // https://github.com/jaydenseric/graphql-upload#type-uploadoptions
+    maxFileSize: 10000000, // 10 MB
+    maxFiles: 20
+  },
   context: ({ currentUser }) => ({ User, Post, currentUser })
 })
 
