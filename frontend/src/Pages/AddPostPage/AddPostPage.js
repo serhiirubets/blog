@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import CloudUpload from "@material-ui/icons/CloudUpload";
 import Typography from "@material-ui/core/Typography";
 import { withApollo, compose } from "react-apollo";
-import { ADD_POST } from "./addPostMutation";
+import { ADD_POST, FILE_UPLOAD } from "./addPostMutation";
 import { fileUpload } from "../../services";
 import styles from "./AddPostPage.scss";
 
@@ -37,6 +37,7 @@ class AddPostPage extends Component {
   handleFileChange = ({ target }) => {
     fileUpload(target)
       .then(src => {
+        this.file = target.files[0];
         this.setState({
           [target.name]: target.value,
           src,
@@ -65,7 +66,7 @@ class AddPostPage extends Component {
       imageUrl,
     } = this.state;
     const { client } = this.props;
-
+    const { file } = this;
     client.mutate({
       mutation: ADD_POST,
       variables: {
@@ -75,6 +76,13 @@ class AddPostPage extends Component {
         imageUrl
       }
     });
+
+    client.mutate({
+      mutation: FILE_UPLOAD,
+      variables: {
+        file,
+      }
+    })
   }
 
   render() {

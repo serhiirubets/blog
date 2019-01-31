@@ -17,6 +17,10 @@ const links = [
   {
     name: "Мои программы",
     to: "/programs"
+  },
+  {
+    name: "Добавить пост",
+    to: "/add-post",
   }
 ];
 
