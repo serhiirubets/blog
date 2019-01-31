@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import Typography from "@material-ui/core/Typography";
 import { GET_POSTS } from './BlogPageQuery';
 
-import { MainLayout, Post } from "../../Components";
+import { MainLayout, Post, Loader } from "../../Components";
 
 import styles from "./BlogPage.scss";
 
@@ -20,7 +20,7 @@ class BlogPage extends Component {
             <Query query={GET_POSTS}>
               {({ loading, error, data: { getPosts } }) => {
                 if (loading) {
-                  return <p>Loading...</p>
+                  return <Loader />
                 }
 
                 if (error) {

@@ -25,6 +25,7 @@ exports.typeDefs = `
   type Query {
     getCurrentUser: User
     getPosts: [Post]
+    getPost(id: ID!): Post
   }
 
   type Mutation {
