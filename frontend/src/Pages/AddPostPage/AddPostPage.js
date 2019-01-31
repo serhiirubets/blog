@@ -35,6 +35,7 @@ class AddPostPage extends Component {
   };
 
   handleFileChange = ({ target }) => {
+    this.file = target;
     fileUpload(target)
       .then(src => {
         this.setState({
@@ -55,7 +56,7 @@ class AddPostPage extends Component {
     this.setState({ ...initState });
   };
 
-  handleSave = (e) => {
+  handleSave = async (e) => {
     e.preventDefault();
 
     const {
@@ -66,7 +67,7 @@ class AddPostPage extends Component {
     } = this.state;
     const { client } = this.props;
 
-    client.mutate({
+    const { data } = await client.mutate({
       mutation: ADD_POST,
       variables: {
         title,
@@ -75,6 +76,17 @@ class AddPostPage extends Component {
         imageUrl
       }
     });
+
+    const formData = new FormData();
+    formData.append('postImage', this.file.files[0]);
+    formData.append('id', data.addPost.id);
+
+    await fetch('http://localhost:4444/photos', {
+      method: 'POST',
+      body: formData
+    });
+
+    console.log('posted')
   }
 
   render() {

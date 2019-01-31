@@ -25,7 +25,7 @@ app.use(
   })
 )
 
-app.use('/graphql', bodyParser.json())
+app.use('/', bodyParser.json())
 
 // Set up JWT authentication middleware
 app.use(async (req, res, next) => {
@@ -47,6 +47,8 @@ const server = new ApolloServer({
   resolvers,
   context: ({ currentUser }) => ({ User, Post, currentUser })
 })
+
+require('./api/fileUpload')(app)
 
 server.applyMiddleware({ app })
 
