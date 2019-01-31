@@ -6,16 +6,19 @@ import { Link } from "react-router-dom";
 
 import styles from "./Post.scss";
 
-const Post = ({ imageUrl, name, category, date, id }) => (
+const localUrl = 'http://localhost:4444/img/';
+const defaultUrl = 'http://localhost:4444/img/fruir.jpg'
+
+const Post = ({ imageUrl, title, category, date, id }) => (
   <Card className={styles.post}>
     <Link to={`/post/${id}`} className={styles.link}>
       <div>
-        <img src="https://picsum.photos/400/200?image=0" alt={name} />
+        <img src={ imageUrl ? `${localUrl}${imageUrl}` : defaultUrl } alt={title} />
       </div>
       <div className={styles.text}>
-        <p className={styles.name}>{name}</p>
+        <p className={styles.title}>{title}</p>
         <div className={styles.footer}>
-          <p className={styles.category}>{category.join(", ")}</p>
+          <p className={styles.category}>{category}</p>
           <p className={styles.date}>{date}</p>
         </div>
       </div>
@@ -24,9 +27,8 @@ const Post = ({ imageUrl, name, category, date, id }) => (
 );
 
 Post.propTypes = {
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  data: PropTypes.string.isRequired,
   imageUrl: PropTypes.string
 };
 

@@ -4,6 +4,7 @@ exports.typeDefs = `
     title: String!
     imageUrl: String!
     category: String!
+    createdAt: String
     text: String!
     likes: Int
     views: Int

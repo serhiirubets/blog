@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Query } from "react-apollo";
 import Typography from "@material-ui/core/Typography";
+import { GET_POSTS } from './BlogPageQuery';
 
 import { MainLayout, Post } from "../../Components";
 
@@ -15,7 +17,33 @@ class BlogPage extends Component {
           </Typography>
 
           <div className={styles.posts}>
-            <Post name="Первая статья" category={['спорт', 'здоровье']} date="24.12.2017" id="dsaf" />
+            <Query query={GET_POSTS}>
+              {({ loading, error, data: { getPosts } }) => {
+                if (loading) {
+                  return <p>Loading...</p>
+                }
+
+                if (error) {
+                  return 'Error BlogPage.js'
+                }
+
+                return getPosts.map(post => {
+                  const { id, text, title, createdAt, category, imageUrl } = post;
+
+                  return (
+                    <Post
+                      key={id}
+                      id={id}
+                      text={text}
+                      title={title}
+                      createdAt={createdAt}
+                      category={category}
+                      imageUrl={imageUrl}
+                    />
+                  )
+                })
+              }}
+            </Query>
           </div>
         </section>
       </MainLayout>

@@ -24,6 +24,7 @@ app.use(
     origin: '*'
   })
 )
+app.use(express.static('public'))
 
 app.use('/', bodyParser.json())
 
