@@ -35,7 +35,6 @@ const signinUser = async (root, { email, password }, { User }) => {
     throw new Error('User not found')
   }
 
-  console(user.password)
   if (user.password !== password) {
     throw new Error('Invalid password')
   }

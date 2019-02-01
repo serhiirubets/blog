@@ -5,8 +5,12 @@ $border-corner-width: 19px;
   padding-top: 50px;
 
   .editButton {
-    margin-bottom: 30px;
+    margin-right: 30px;
   }
+}
+
+.buttons {
+  margin-bottom: 20px;
 }
 
 .title {
@@ -76,6 +80,5 @@ $border-corner-width: 19px;
     color: black;
     text-decoration: none;
   }
-
 }
 

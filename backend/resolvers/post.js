@@ -34,12 +34,27 @@ const addPost = async (root, attrs, { Post }) => {
   }
 }
 
+const deletePost = async (root, attrs, { Post }) => {
+  const { id } = attrs
+  
+  if (!id) {
+    return null
+  }
+
+  const post = await Post.findOneAndDelete({ _id: id })
+
+  return {
+    id: post._id
+  }
+}
+
 module.exports = {
   queries: {
     getPosts,
     getPost
   },
   mutations: {
-    addPost
+    addPost,
+    deletePost
   }
 }
