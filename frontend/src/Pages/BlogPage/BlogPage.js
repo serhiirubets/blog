@@ -19,8 +19,6 @@ class BlogPage extends Component {
           <div className={styles.posts}>
             <Query query={GET_POSTS}>
               {({ loading, error, data }) => {
-                 console.log(data) 
-
                 if (loading) {
                   return <Loader />
                 }

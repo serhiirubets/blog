@@ -1,12 +1,15 @@
 const authResolvers = require('../resolvers/auth')
-const postResovers = require('../resolvers/post')
+const postResolvers = require('../resolvers/post')
+const userResolvers = require('../resolvers/user')
 
 exports.resolvers = {
   Query: {
-    ...postResovers.queries
+    ...postResolvers.queries,
+    ...authResolvers.queries,
+    ...userResolvers.queries
   },
   Mutation: {
     ...authResolvers,
-    ...postResovers.mutations
+    ...postResolvers.mutations
   }
 }

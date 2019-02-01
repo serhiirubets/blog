@@ -35,11 +35,16 @@ const signinUser = async (root, { email, password }, { User }) => {
     throw new Error('User not found')
   }
 
-  const isValidPassword = await bcrypt.compare(password, user.password)
-
-  if (!isValidPassword) {
+  console(user.password)
+  if (user.password !== password) {
     throw new Error('Invalid password')
   }
+
+  // const isValidPassword = await bcrypt.compare(password, user.password)
+
+  // if (!isValidPassword) {
+  //   throw new Error('Invalid password')
+  // }
 
   return { token: createToken(user, process.env.SECRET, '1hr') }
 }

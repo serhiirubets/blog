@@ -77,8 +77,6 @@ class AddPostPage extends Component {
       variables: data
     });
 
-    console.log(addPost);
-
     if (this.file && this.file.files.length) {
       const formData = new FormData();
 

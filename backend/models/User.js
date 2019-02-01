@@ -22,7 +22,7 @@ UserSchema.pre('save', function (next) {
   if (!this.isModified('password')) {
     return next()
   }
-  console.log(this.password, 'PASSWORD')
+
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err)
 

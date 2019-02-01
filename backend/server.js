@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ currentUser }) => ({ User, Post, currentUser })
+  context: ({ req }) => ({ User, Post, currentUser: req.currentUser })
 })
 
 require('./api/fileUpload')(app)
