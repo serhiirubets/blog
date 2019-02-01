@@ -3,7 +3,6 @@ const getPosts = (_, __, { Post }) => {
 }
 
 const getPost = (_, { id }, { Post }) => {
-  console.log(id)
   return Post.findById(id)
 }
 
