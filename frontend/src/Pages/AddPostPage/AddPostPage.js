@@ -5,7 +5,8 @@ import Button from "@material-ui/core/Button";
 import CloudUpload from "@material-ui/icons/CloudUpload";
 import Typography from "@material-ui/core/Typography";
 import { withApollo, compose } from "react-apollo";
-import { ADD_POST } from "./addPostMutation";
+import { ADD_POST  } from "./addPostMutation";
+import { GET_POST } from '../PostPage/PostPageQuery';
 import { fileUpload } from "../../services";
 import { MainLayout } from "../../Components";
 import styles from "./AddPostPage.scss";
@@ -58,30 +59,68 @@ class AddPostPage extends Component {
   handleSave = async e => {
     e.preventDefault();
 
-    const { title, text, category, imageUrl } = this.state;
+    const { title, text, category } = this.state;
     const { client } = this.props;
 
-    const { data } = await client.mutate({
+    const data = {
+      title,
+      text,
+      category
+    };
+
+    if (this.state.id) {
+      data.id = this.state.id;
+    }
+
+    const {data: {addPost}} = await client.mutate({
       mutation: ADD_POST,
-      variables: {
-        title,
-        text,
-        category,
-        imageUrl
+      variables: data
+    });
+
+    console.log(addPost);
+
+    if (this.file && this.file.files.length) {
+      const formData = new FormData();
+
+      if (addPost && addPost.id) {
+        formData.append("id", addPost.id);
       }
-    });
+      
+      formData.append("postImage", this.file.files[0]);
+    
+      await fetch("http://localhost:4444/photos", {
+        method: "POST",
+        body: formData,
+      });
+    }
 
-    const formData = new FormData();
-    formData.append("postImage", this.file.files[0]);
-    formData.append("id", data.addPost.id);
-
-    await fetch("http://localhost:4444/photos", {
-      method: "POST",
-      body: formData
-    });
-
-    console.log("posted");
+    this.setState({...initState});
+    this.props.history.push('/');
   };
+
+  async componentDidMount() {
+    const { id } = this.props.match.params;
+
+    if (!id) {
+      return;
+    }
+
+    const { data: { getPost } } = await this.props.client.query({
+      query: GET_POST,
+      variables: {
+        id: id,
+      }
+    })
+
+    if (!getPost) {
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      ...getPost
+    });
+  }
 
   render() {
     const { title, text, category, src, fileUploadError } = this.state;

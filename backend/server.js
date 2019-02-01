@@ -26,7 +26,8 @@ app.use(
 )
 app.use(express.static('public'))
 
-app.use('/', bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // Set up JWT authentication middleware
 app.use(async (req, res, next) => {

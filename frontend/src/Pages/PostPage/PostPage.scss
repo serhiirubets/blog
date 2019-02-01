@@ -3,6 +3,10 @@ $border-corner-width: 19px;
 
 .container {
   padding-top: 50px;
+
+  .editButton {
+    margin-bottom: 30px;
+  }
 }
 
 .title {
@@ -74,3 +78,4 @@ $border-corner-width: 19px;
   }
 
 }
+

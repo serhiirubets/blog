@@ -18,7 +18,9 @@ class BlogPage extends Component {
 
           <div className={styles.posts}>
             <Query query={GET_POSTS}>
-              {({ loading, error, data: { getPosts } }) => {
+              {({ loading, error, data }) => {
+                 console.log(data) 
+
                 if (loading) {
                   return <Loader />
                 }
@@ -27,7 +29,12 @@ class BlogPage extends Component {
                   return 'Error BlogPage.js'
                 }
 
-                return getPosts.map(post => {
+               
+                if (!data.getPosts) {
+                  return null;
+                }
+
+                return data.getPosts.map(post => {
                   const { id, text, title, createdAt, category, imageUrl } = post;
 
                   return (

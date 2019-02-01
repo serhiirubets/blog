@@ -2,7 +2,7 @@ exports.typeDefs = `
   type Post {
     id: ID
     title: String!
-    imageUrl: String!
+    imageUrl: String
     category: String!
     createdAt: String
     text: String!
@@ -29,12 +29,11 @@ exports.typeDefs = `
   }
 
   type Mutation {
-    addPost(title: String!, imageUrl: String, text: String!, category: String!, username: String): Post
-    updatePost(id: ID!, title: String!, imageUrl: String!, description: String!, category: String!): Post
+    addPost(id: ID, title: String!, imageUrl: String, text: String!, category: String!, username: String): Post
     likePost(id: ID!): Post
     unlikePost(id: ID!): Post
     signupUser(username: String!, email: String!, password: String!): Token
     signinUser(email: String!, password: String!): Token
-    deletePost(_id: ID!): Post
+    deletePost(id: ID!): Post
   }
 `

@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import { GET_POST } from "./PostPageQuery";
 import { Link } from 'react-router-dom';
 import { MainLayout, Loader } from "../../Components/";
+import Button from "@material-ui/core/Button";
 import { toDateString } from '../../services'
 import styles from './PostPage.scss';
 
@@ -25,10 +26,19 @@ class PostPage extends Component {
                 return <p>Error Post page</p>;
               }
               
-              const { imageUrl, text, title, category, createdAt } = data.getPost;
+              const { id, imageUrl, text, title, category, createdAt } = data.getPost;
   
               return (
                 <article>
+                  <Button
+                    component={Link}
+                    to={`/post/edit/${id}`}
+                    variant="contained"
+                    color="primary"
+                    className={styles.editButton}
+                  >
+                    Edit
+                  </Button>
                   <h2 className={styles.title}>{title}</h2>
                   <p className={styles.date}>{toDateString(createdAt)}</p>
                   <div className={styles.content}>
