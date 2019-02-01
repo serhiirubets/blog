@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { withApollo, compose } from "react-apollo";
 import { ADD_POST } from "./addPostMutation";
 import { fileUpload } from "../../services";
+import { MainLayout } from "../../Components";
 import styles from "./AddPostPage.scss";
 
 const initState = {
@@ -18,9 +19,7 @@ const initState = {
   fileUploadError: ""
 };
 
-@compose(
-  withApollo
-)
+@compose(withApollo)
 class AddPostPage extends Component {
   state = {
     ...initState
@@ -56,15 +55,10 @@ class AddPostPage extends Component {
     this.setState({ ...initState });
   };
 
-  handleSave = async (e) => {
+  handleSave = async e => {
     e.preventDefault();
 
-    const {
-      title,
-      text,
-      category,
-      imageUrl,
-    } = this.state;
+    const { title, text, category, imageUrl } = this.state;
     const { client } = this.props;
 
     const { data } = await client.mutate({
@@ -78,27 +72,22 @@ class AddPostPage extends Component {
     });
 
     const formData = new FormData();
-    formData.append('postImage', this.file.files[0]);
-    formData.append('id', data.addPost.id);
+    formData.append("postImage", this.file.files[0]);
+    formData.append("id", data.addPost.id);
 
-    await fetch('http://localhost:4444/photos', {
-      method: 'POST',
+    await fetch("http://localhost:4444/photos", {
+      method: "POST",
       body: formData
     });
 
-    console.log('posted')
-  }
+    console.log("posted");
+  };
 
   render() {
-    const {
-      title,
-      text,
-      category,
-      src,
-      fileUploadError
-    } = this.state;
+    const { title, text, category, src, fileUploadError } = this.state;
     const { handleChange, handleFileChange, handleReset } = this;
-      return (
+    return (
+      <MainLayout>
         <form className={styles.form} onSubmit={this.handleSave}>
           <Typography component="h2" variant="h4">
             Please add new post
@@ -156,11 +145,7 @@ class AddPostPage extends Component {
           </div>
 
           <div className={styles.buttons}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleReset}
-            >
+            <Button variant="contained" color="secondary" onClick={handleReset}>
               Reset
             </Button>
 
@@ -169,7 +154,8 @@ class AddPostPage extends Component {
             </Button>
           </div>
         </form>
-      );
+      </MainLayout>
+    );
   }
 }
 

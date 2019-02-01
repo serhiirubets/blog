@@ -8,6 +8,7 @@ export const fragments = {
       text
       category
       imageUrl
+      createdAt
     }
   `,
 }
