@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
 import Typography from "@material-ui/core/Typography";
-import { GET_POSTS } from './BlogPageQuery';
+import { GET_POSTS } from "./BlogPageQuery";
 
 import { MainLayout, Post, Loader } from "../../Components";
 
@@ -20,20 +20,26 @@ class BlogPage extends Component {
             <Query query={GET_POSTS}>
               {({ loading, error, data }) => {
                 if (loading) {
-                  return <Loader />
+                  return <Loader />;
                 }
 
                 if (error) {
-                  return 'Error BlogPage.js'
+                  return "Error BlogPage.js";
                 }
 
-               
                 if (!data.getPosts) {
                   return null;
                 }
 
                 return data.getPosts.map(post => {
-                  const { id, text, title, createdAt, category, imageUrl } = post;
+                  const {
+                    id,
+                    text,
+                    title,
+                    createdAt,
+                    category,
+                    imageUrl
+                  } = post;
 
                   return (
                     <Post
@@ -45,8 +51,8 @@ class BlogPage extends Component {
                       category={category}
                       imageUrl={imageUrl}
                     />
-                  )
-                })
+                  );
+                });
               }}
             </Query>
           </div>

@@ -8,6 +8,11 @@
   }
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .link {
   text-decoration: none;
   color: black;
@@ -24,11 +29,9 @@
 }
 
 .category {
-
 }
 
 .date {
-
 }
 
 .footer {

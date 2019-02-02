@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 import { withUser } from "../../helpers";
 import { MainLayout, Loader } from "../../Components/";
 import Button from "@material-ui/core/Button";
-import { DELETE_POST } from './PostPageMutation';
+import { DELETE_POST } from "./PostPageMutation";
 import { toDateString } from "../../services";
 import styles from "./PostPage.scss";
+const defaultUrl = "http://localhost:4444/img/fruir.jpg";
 
 @compose(
   withUser,
   withApollo
 )
-
 class PostPage extends Component {
-  delete = ()=> {
-    const confirm = window.confirm('Реально удалить?');
+  delete = () => {
+    const confirm = window.confirm("Реально удалить?");
 
     if (confirm) {
       this.props.client.mutate({
@@ -24,9 +24,9 @@ class PostPage extends Component {
         variables: {
           id: this.props.match.params.id
         }
-      })
+      });
     }
-  }
+  };
 
   render() {
     const {
@@ -60,34 +60,31 @@ class PostPage extends Component {
               return (
                 <article>
                   {currentUser && (
-                   <div className={styles.buttons}>
+                    <div className={styles.buttons}>
                       <Button
-                      component={Link}
-                      to={`/post/edit/${id}`}
-                      variant="contained"
-                      color="primary"
-                      className={styles.editButton}
-                    >
-                      Edit
-                    </Button>
+                        component={Link}
+                        to={`/post/edit/${id}`}
+                        variant="contained"
+                        color="primary"
+                        className={styles.editButton}
+                      >
+                        Edit
+                      </Button>
 
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={this.delete}
-                    >
-                      Delete
-                    </Button>
-                   </div>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.delete}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   )}
                   <h2 className={styles.title}>{title}</h2>
                   <p className={styles.date}>{toDateString(createdAt)}</p>
                   <div className={styles.content}>
                     <div className={styles.picture}>
-                      <img
-                        src={`http://localhost:4444/img/${imageUrl}`}
-                        alt={title}
-                      />
+                      <img src={defaultUrl} alt={title} />
                     </div>
                     <div
                       dangerouslySetInnerHTML={{ __html: text }}

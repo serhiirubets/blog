@@ -28,7 +28,7 @@ $border-corner-width: 19px;
   &:after {
     display: block;
     clear: both;
-    content: '';
+    content: "";
   }
 }
 
@@ -38,7 +38,7 @@ $border-corner-width: 19px;
 }
 
 .text {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   line-height: 1.5;
 }
@@ -53,16 +53,16 @@ $border-corner-width: 19px;
   margin-top: 0;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     top: 0;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-top: $border-corner-width solid transparent;
-    border-bottom: $border-corner-width solid transparent; 
-    
-    border-right: $border-corner-width solid white; 
+    border-bottom: $border-corner-width solid transparent;
+
+    border-right: $border-corner-width solid white;
   }
 }
 
@@ -76,9 +76,14 @@ $border-corner-width: 19px;
   border: 1px solid black;
   padding: 5px 10px;
 
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
   a {
     color: black;
     text-decoration: none;
   }
 }
-
