@@ -8,7 +8,7 @@ export const Footer = () => (
     <div className="container">
       <div>
         <h2>Я в соц. сетях:</h2>
-        <ul>
+        <ul className={styles.socials}>
           <li>
             <a href="https://www.youtube.com/channel/UCwMnDJrWnxoCoKRzL_9C4Qw" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>
           </li>

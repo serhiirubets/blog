@@ -34,8 +34,7 @@ class PostPage extends Component {
     } = this.props;
 
     return (
-      <div>
-        <MainLayout />
+      <MainLayout>
         <div className={`${styles.container} container`}>
           <Query query={GET_POST} variables={{ id: params.id }}>
             {({ loading, error, data }) => {
@@ -104,7 +103,7 @@ class PostPage extends Component {
             }}
           </Query>
         </div>
-      </div>
+      </MainLayout>
     );
   }
 }
