@@ -8,8 +8,6 @@ import { MainLayout, Post, Loader } from "../../Components";
 import styles from "./BlogPage.scss";
 
 class BlogPage extends Component {
-  sortByNew = (a, b) => b.createdAt - a.createdAt;
-
   render() {
     return (
       <MainLayout>
@@ -33,7 +31,7 @@ class BlogPage extends Component {
                   return null;
                 }
 
-                return [...data.getPosts].sort(this.sortByNew).map(post => {
+                return data.getPosts.map(post => {
                   const {
                     id,
                     text,

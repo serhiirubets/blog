@@ -1,5 +1,7 @@
 const getPosts = (_, __, { Post }) => {
-  return Post.find()
+  return Post
+    .find()
+    .sort({ createdAt: -1 })
 }
 
 const getPost = (_, { id }, { Post }) => {
