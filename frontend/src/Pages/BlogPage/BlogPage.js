@@ -17,7 +17,7 @@ class BlogPage extends Component {
           </Typography>
 
           <div className={styles.posts}>
-            <Query query={GET_POSTS}>
+            <Query query={GET_POSTS} variables={{category: this.props.match.params.category}}>
               {({ loading, error, data }) => {
                 if (loading) {
                   return <Loader />;

@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const GET_POSTS = gql`
-    query {
-        getPosts {
+    query($category: String) {
+        getPosts(category: $category) {
           id
           title
           imageUrl

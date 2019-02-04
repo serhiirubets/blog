@@ -24,7 +24,7 @@ exports.typeDefs = `
 
   type Query {
     getCurrentUser: User
-    getPosts: [Post]
+    getPosts(category: String): [Post]
     getPost(id: ID!): Post
   }
 

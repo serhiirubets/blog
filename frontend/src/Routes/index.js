@@ -13,7 +13,7 @@ const AppRouter = () => (
     <Router>
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/blog" component={BlogPage} />
+        <Route path="/blog/:category" component={BlogPage} />
         <Route path="/post/:id" exact component={PostPage} />
         <Route path="/post/edit/:id" exact component={AddPostPage} />
         <Route path="/add-post" component={AddPostPage} />

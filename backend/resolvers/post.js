@@ -1,4 +1,11 @@
-const getPosts = (_, __, { Post }) => {
+const getPosts = (_, { category }, { Post }) => {
+  if (category) {
+    // TODO: add filter by category
+    return Post
+      .find()
+      .sort({ createdAt: -1 })
+  }
+
   return Post
     .find()
     .sort({ createdAt: -1 })
@@ -38,7 +45,7 @@ const addPost = async (root, attrs, { Post }) => {
 
 const deletePost = async (root, attrs, { Post }) => {
   const { id } = attrs
-  
+
   if (!id) {
     return null
   }

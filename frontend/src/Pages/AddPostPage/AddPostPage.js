@@ -9,6 +9,7 @@ import { withApollo, compose } from "react-apollo";
 import { withUser } from '../../helpers';
 import { ADD_POST  } from "./addPostMutation";
 import { GET_POST } from '../PostPage/PostPageQuery';
+import { GET_POSTS } from '../BlogPage/BlogPageQuery';
 import { fileUpload } from "../../services";
 import { MainLayout } from "../../Components";
 import styles from "./AddPostPage.scss";
@@ -79,7 +80,10 @@ class AddPostPage extends Component {
 
     const {data: {addPost}} = await client.mutate({
       mutation: ADD_POST,
-      variables: data
+      variables: data,
+      refetchQueries: [
+        { query: GET_POSTS }
+      ]
     });
 
     if (this.file && this.file.files.length) {

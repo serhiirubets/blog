@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Query, compose, withApollo } from "react-apollo";
+import { Redirect } from 'react-router-dom';
 import { GET_POST } from "./PostPageQuery";
 import { Link } from "react-router-dom";
 import { withUser } from "../../helpers";
+import { GET_POSTS } from '../BlogPage/BlogPageQuery';
 import { MainLayout, Loader } from "../../Components/";
 import Button from "@material-ui/core/Button";
 import { DELETE_POST } from "./PostPageMutation";
@@ -19,12 +21,18 @@ class PostPage extends Component {
     const confirm = window.confirm("Реально удалить?");
 
     if (confirm) {
+      const { id } = this.props.match.params;
       this.props.client.mutate({
         mutation: DELETE_POST,
         variables: {
-          id: this.props.match.params.id
-        }
-      });
+          id,
+        },
+        refetchQueries: [
+          { query: GET_POSTS }
+        ]
+      }).then(() => {
+        this.props.history.push('/blog');
+      })
     }
   };
 
@@ -44,6 +52,10 @@ class PostPage extends Component {
 
               if (error) {
                 return <p>Error Post page</p>;
+              }
+
+              if (!data.getPost) {
+                return <Redirect to="/posts" />
               }
 
               const {
