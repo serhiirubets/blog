@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
 import CKEditor from "react-ckeditor-component";
 import Button from "@material-ui/core/Button";
 import CloudUpload from "@material-ui/icons/CloudUpload";
 import Typography from "@material-ui/core/Typography";
 import { withApollo, compose } from "react-apollo";
+import { withUser } from '../../helpers';
 import { ADD_POST  } from "./addPostMutation";
 import { GET_POST } from '../PostPage/PostPageQuery';
 import { fileUpload } from "../../services";
@@ -20,7 +22,10 @@ const initState = {
   fileUploadError: ""
 };
 
-@compose(withApollo)
+@compose(
+  withApollo,
+  withUser,
+)
 class AddPostPage extends Component {
   state = {
     ...initState
@@ -121,6 +126,10 @@ class AddPostPage extends Component {
   }
 
   render() {
+    if (!this.props.currentUser) {
+      return <Redirect to="/" />
+    }
+
     const { title, text, category, src, fileUploadError } = this.state;
     const { handleChange, handleFileChange, handleReset } = this;
     return (

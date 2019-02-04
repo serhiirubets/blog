@@ -33,7 +33,8 @@ export class LoginPage extends Component {
 
     if (token) {
       localStorage.setItem('token', token);
-      // this.props.history.push('/');
+      this.setState({ ...initState });
+      this.props.history.push('/');
     }
 
   }

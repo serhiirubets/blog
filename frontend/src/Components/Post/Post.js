@@ -13,7 +13,7 @@ const defaultUrl = "http://localhost:4444/img/fruir.jpg";
 const Post = ({ imageUrl, title, category, date, id, createdAt }) => (
   <Card className={styles.post}>
     <Link to={`/post/${id}`} className={styles.link}>
-      <div>
+      <div className={styles.postPicture}>
         <img
           src={imageUrl ? `${localUrl}${imageUrl}` : defaultUrl}
           alt={title}

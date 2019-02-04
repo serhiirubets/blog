@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { HomePage, BlogPage, PostPage, AddPostPage, LoginPage } from '../Pages';
 import '../styles/common.scss';
 
@@ -18,6 +18,7 @@ const AppRouter = () => (
         <Route path="/post/edit/:id" exact component={AddPostPage} />
         <Route path="/add-post" component={AddPostPage} />
         <Route path="/login" component={LoginPage} />
+        <Redirect from="*" to="/blog" />
       </Switch>
     </Router>
   </MuiThemeProvider>
