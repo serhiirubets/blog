@@ -1,16 +1,11 @@
-const getPosts = async (_, { category }, { Post }) => {
+const getPosts = async (_, { category, offset = 0, limit }, { Post }) => {
+  const posts = await Post.find().sort({ createdAt: -1 })
+  let postsForShow = [...posts]
   if (category) {
-    // TODO: add filter by category
-    const post = await Post
-      .find()
-      .sort({ createdAt: -1 })
-
-    return post.filter(item => item.category === category)
+    postsForShow = posts.filter(item => item.category === category)
   }
 
-  return Post
-    .find()
-    .sort({ createdAt: -1 })
+  return postsForShow.slice(offset, limit || postsForShow.length)
 }
 
 const getPost = (_, { id }, { Post }) => {
