@@ -1,9 +1,11 @@
-const getPosts = (_, { category }, { Post }) => {
+const getPosts = async (_, { category }, { Post }) => {
   if (category) {
     // TODO: add filter by category
-    return Post
+    const post = await Post
       .find()
       .sort({ createdAt: -1 })
+
+    return post.filter(item => item.category === category)
   }
 
   return Post
