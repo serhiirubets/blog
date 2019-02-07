@@ -1,11 +1,22 @@
 const getPosts = async (_, { category, offset = 0, limit }, { Post }) => {
-  const posts = await Post.find().sort({ createdAt: -1 })
-  let postsForShow = [...posts]
+  let posts = []
+  const categoryRegExp = new RegExp(category, 'i')
+
   if (category) {
-    postsForShow = posts.filter(item => item.category === category)
+    posts = Post.find({ category: categoryRegExp }).sort({ createdAt: -1 })
+  } else {
+    posts = Post.find().sort({ createdAt: -1 })
   }
 
-  return postsForShow.slice(offset, limit || postsForShow.length)
+  if (offset) {
+    posts.skip(offset)
+  }
+
+  if (limit) {
+    posts.limit(limit)
+  }
+
+  return posts
 }
 
 const getPost = (_, { id }, { Post }) => {

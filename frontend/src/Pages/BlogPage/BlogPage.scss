@@ -9,5 +9,10 @@
 
 .posts {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+}
+
+.loadMoreButton {
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
+import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import { GET_POSTS } from "./BlogPageQuery";
 
@@ -16,9 +17,16 @@ class BlogPage extends Component {
             Последние новости:
           </Typography>
 
-          <div className={styles.posts}>
-            <Query query={GET_POSTS} variables={{category: this.props.match.params.category}}>
-              {({ loading, error, data }) => {
+          
+            <Query
+              query={GET_POSTS}
+              fetchPolicy="cache-and-network"
+              variables={{
+                category: this.props.match.params.category,
+                offset: 0,
+                limit: 2
+              }}>
+              {({ loading, error, data, fetchMore }) => {
                 if (loading) {
                   return <Loader />;
                 }
@@ -31,31 +39,60 @@ class BlogPage extends Component {
                   return null;
                 }
 
-                return data.getPosts.map(post => {
-                  const {
-                    id,
-                    text,
-                    title,
-                    createdAt,
-                    category,
-                    imageUrl
-                  } = post;
-
-                  return (
-                    <Post
-                      key={id}
-                      id={id}
-                      text={text}
-                      title={title}
-                      createdAt={createdAt}
-                      category={category}
-                      imageUrl={imageUrl}
-                    />
-                  );
-                });
+                return (
+                  <>
+                    <div className={styles.posts}>
+                      {
+                        data.getPosts.map(post => {
+                          const {
+                            id,
+                            text,
+                            title,
+                            createdAt,
+                            category,
+                            imageUrl
+                          } = post;
+        
+                          return (
+                            <Post
+                              key={id}
+                              id={id}
+                              text={text}
+                              title={title}
+                              createdAt={createdAt}
+                              category={category}
+                              imageUrl={imageUrl}
+                            />
+                          );
+                        })
+                      }
+                    </div>
+                    <p className={styles.loadMoreButton}>
+                      <Button
+                        onClick={() => {
+                          fetchMore({
+                            variables: {
+                              offset: data.getPosts.length
+                            },
+                            updateQuery: (prev, { fetchMoreResult }) => {
+                              if (!fetchMoreResult) return prev;
+                              console.log(prev)
+                              console.log(fetchMoreResult)
+                              return Object.assign({}, prev, {
+                                getPosts: [...prev.getPosts, ...fetchMoreResult.getPosts]
+                              });
+                            }
+                          })
+                        }}
+                        variant="contained"
+                        color="primary">
+                        Load more
+                      </Button>
+                    </p>
+                  </>
+                )
               }}
             </Query>
-          </div>
         </section>
       </MainLayout>
     );
