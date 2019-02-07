@@ -76,8 +76,6 @@ class BlogPage extends Component {
                             },
                             updateQuery: (prev, { fetchMoreResult }) => {
                               if (!fetchMoreResult) return prev;
-                              console.log(prev)
-                              console.log(fetchMoreResult)
                               return Object.assign({}, prev, {
                                 getPosts: [...prev.getPosts, ...fetchMoreResult.getPosts]
                               });

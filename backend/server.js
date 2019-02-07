@@ -50,7 +50,7 @@ const server = new ApolloServer({
   context: ({ req }) => ({ User, Post, currentUser: req.currentUser })
 })
 
-// require('./api/fileUpload')(app)
+require('./api/fileUpload')(app)
 
 server.applyMiddleware({ app })
 

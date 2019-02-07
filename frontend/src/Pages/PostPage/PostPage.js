@@ -68,6 +68,10 @@ class PostPage extends Component {
               } = data.getPost;
               const { currentUser } = this.props;
 
+              const srcUrl = imageUrl
+                ? `http://localhost:4444/img/${imageUrl}`
+                : defaultUrl
+
               return (
                 <article>
                   {currentUser && (
@@ -95,7 +99,7 @@ class PostPage extends Component {
                   <p className={styles.date}>{toDateString(createdAt)}</p>
                   <div className={styles.content}>
                     <div className={styles.picture}>
-                      <img src={defaultUrl} alt={title} />
+                      <img src={srcUrl} alt={title} />
                     </div>
                     <div
                       dangerouslySetInnerHTML={{ __html: text }}
