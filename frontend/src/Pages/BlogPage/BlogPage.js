@@ -8,6 +8,7 @@ import { MainLayout, Post, Loader } from "../../Components";
 
 import styles from "./BlogPage.scss";
 
+
 class BlogPage extends Component {
   render() {
     return (
@@ -20,7 +21,6 @@ class BlogPage extends Component {
           
             <Query
               query={GET_POSTS}
-              fetchPolicy="cache-and-network"
               variables={{
                 category: this.props.match.params.category,
                 offset: 0,
@@ -84,7 +84,7 @@ class BlogPage extends Component {
                         }}
                         variant="contained"
                         color="primary">
-                        Load more
+                          Load more
                       </Button>
                     </p>
                   </>
