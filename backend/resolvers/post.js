@@ -65,6 +65,18 @@ const deletePost = async (root, attrs, { Post }) => {
   }
 }
 
+const likePost = async (root, { id }, { Post }) => {
+  const post = await Post.findOneAndUpdate({ _id: id }, { $inc: { likes: 1 } })
+
+  return post
+}
+
+const unlikePost = async (root, { id }, { Post }) => {
+  const post = await Post.findOneAndUpdate({ _id: id }, { $inc: { likes: -1 } })
+
+  return post
+}
+
 module.exports = {
   queries: {
     getPosts,
@@ -72,6 +84,8 @@ module.exports = {
   },
   mutations: {
     addPost,
-    deletePost
+    deletePost,
+    likePost,
+    unlikePost
   }
 }

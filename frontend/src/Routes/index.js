@@ -12,7 +12,6 @@ const AppRouter = () => (
   <MuiThemeProvider theme={theme}>
     <Router>
       <Switch>
-        <Route path="/" exact component={HomePage} />
         <Route path="/blog/:category" component={BlogPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/post/:id" exact component={PostPage} />

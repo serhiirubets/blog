@@ -7,9 +7,12 @@ import { withUser } from "../../helpers";
 import { GET_POSTS } from '../BlogPage/BlogPageQuery';
 import { MainLayout, Loader } from "../../Components/";
 import Button from "@material-ui/core/Button";
-import { DELETE_POST } from "./PostPageMutation";
-import { toDateString } from "../../services";
+import { DELETE_POST, LIKE_POST, UNLIKE_POST } from "./PostPageMutation";
+import { toDateString, checkForLike, checkForDislike, setLike, setDislike } from "../../services";
 import styles from "./PostPage.scss";
+import ThumbUpAlt from '@material-ui/icons/ThumbUpAlt'
+import ThumbDownAlt from '@material-ui/icons/ThumbDownAlt'
+
 const defaultUrl = "http://localhost:4444/img/fruir.jpg";
 
 @compose(
@@ -35,6 +38,67 @@ class PostPage extends Component {
       })
     }
   };
+
+  handleLike = () => {
+  
+    const { id } = this.props.match.params;
+    if (checkForLike(id)) {
+      return;
+    }
+    setLike(id);
+    this.props.client.mutate({
+      mutation: LIKE_POST,
+      variables: {
+        id,
+      },
+      update: (cache, { data: { addTodo } }) => {
+        const { getPost } = cache.readQuery({
+          query: GET_POST,
+          variables: {
+            id
+          }
+        });
+
+        cache.writeQuery({
+          query: GET_POST,
+          data: {
+            getPost: {
+              ...getPost,
+              likes: getPost.likes + 1
+            }
+          }
+        })
+      }
+    });
+  }
+
+  handleUnlike = () => {
+    const { id } = this.props.match.params;
+    if (checkForDislike(id)) {
+      return;
+    }
+    setDislike(id)
+    this.props.client.mutate({
+      mutation: UNLIKE_POST,
+      variables: { id },
+      update: (cache, { data: { addTodo } }) => {
+        const { getPost } = cache.readQuery({
+          query: GET_POST,
+          variables: { id }
+        });
+
+        cache.writeQuery({
+          query: GET_POST,
+          data: {
+            getPost: {
+              ...getPost,
+              likes: getPost.likes - 1
+            }
+          }
+        })
+      }
+    });
+  }
 
   render() {
     const {
@@ -64,7 +128,8 @@ class PostPage extends Component {
                 text,
                 title,
                 category,
-                createdAt
+                createdAt,
+                likes
               } = data.getPost;
               const { currentUser } = this.props;
 
@@ -114,6 +179,16 @@ class PostPage extends Component {
                       </li>
                     ))}
                   </ul>
+
+                  <p className={styles.likeButtons}>
+                      <Button onClick={this.handleUnlike}>
+                        <ThumbDownAlt />
+                      </Button>
+                      {likes}
+                      <Button onClick={this.handleLike}>
+                        <ThumbUpAlt />
+                      </Button>
+                  </p>
                 </article>
               );
             }}
