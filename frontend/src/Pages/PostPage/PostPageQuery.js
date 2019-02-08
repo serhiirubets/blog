@@ -6,7 +6,20 @@ export const GET_POST = gql`
     getPost(id: $id) {
       ...PostCommon
       likes
+      comments {
+        username
+        text
+      }
     }
   }
   ${fragments.post}
 `;
+
+export const ADD_COMMENT = gql`
+  mutation($postId: ID!, $username: String!, $text: String!) {
+    addComment(postId: $postId, username: $username, text: $text) {
+      username
+      text
+    }
+  }
+`

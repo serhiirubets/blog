@@ -24,8 +24,8 @@ exports.typeDefs = `
   }
 
   type PostComment {
-    username: String!
-    text: String!
+    username: String
+    text: String
   }
 
   type Query {

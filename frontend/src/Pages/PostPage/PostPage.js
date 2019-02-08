@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { withUser } from "../../helpers";
 import { GET_POSTS } from '../BlogPage/BlogPageQuery';
 import { MainLayout, Loader } from "../../Components/";
+import { Comments } from './Comments';
 import Button from "@material-ui/core/Button";
 import { DELETE_POST, LIKE_POST, UNLIKE_POST } from "./PostPageMutation";
 import { toDateString, checkForLike, checkForDislike, setLike, setDislike } from "../../services";
@@ -129,7 +130,8 @@ class PostPage extends Component {
                 title,
                 category,
                 createdAt,
-                likes
+                likes,
+                comments
               } = data.getPost;
               const { currentUser } = this.props;
 
@@ -189,6 +191,8 @@ class PostPage extends Component {
                         <ThumbUpAlt />
                       </Button>
                   </p>
+
+                  <Comments comments={comments} />
                 </article>
               );
             }}

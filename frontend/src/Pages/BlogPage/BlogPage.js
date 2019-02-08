@@ -24,7 +24,7 @@ class BlogPage extends Component {
               variables={{
                 category: this.props.match.params.category,
                 offset: 0,
-                limit: 2
+                limit: 10
               }}>
               {({ loading, error, data, fetchMore }) => {
                 if (loading) {
