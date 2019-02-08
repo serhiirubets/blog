@@ -12,6 +12,7 @@ const { resolvers } = require('./config/resolvers')
 // Mongo models
 const User = require('./models/User')
 const Post = require('./models/Post')
+const PostComment = require('./models/PostComment')
 
 require('dotenv').config()
 require('./config/db-connection')
@@ -47,7 +48,7 @@ app.use(async (req, res, next) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ User, Post, currentUser: req.currentUser })
+  context: ({ req }) => ({ User, Post, PostComment, currentUser: req.currentUser })
 })
 
 require('./api/fileUpload')(app)

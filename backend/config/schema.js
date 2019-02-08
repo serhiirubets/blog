@@ -8,6 +8,7 @@ exports.typeDefs = `
     text: String!
     likes: Int
     views: Int
+    comments: [PostComment]
   }
 
   type User {
@@ -22,6 +23,11 @@ exports.typeDefs = `
     token: String!
   }
 
+  type PostComment {
+    username: String!
+    text: String!
+  }
+
   type Query {
     getCurrentUser: User
     getPosts(category: String, offset: Int, limit: Int): [Post]
@@ -30,6 +36,7 @@ exports.typeDefs = `
 
   type Mutation {
     addPost(id: ID, title: String!, imageUrl: String, text: String!, category: String!, username: String): Post
+    addPostComment(postId: ID!, username: String!, text: String!): PostComment
     likePost(id: ID!): Post
     unlikePost(id: ID!): Post
     signupUser(username: String!, email: String!, password: String!): Token

@@ -16,7 +16,7 @@ const getPosts = async (_, { category, offset = 0, limit }, { Post }) => {
     posts.limit(limit)
   }
 
-  return posts
+  return posts.populate('comments')
 }
 
 const getPost = (_, { id }, { Post }) => {
