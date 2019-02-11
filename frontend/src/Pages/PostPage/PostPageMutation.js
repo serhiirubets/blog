@@ -23,3 +23,14 @@ export const UNLIKE_POST = gql`
     }
   }
 `;
+
+export const ADD_POST_COMMENT = gql`
+  mutation($postId: ID!, $username: String!, $text: String!) {
+    addPostComment(postId: $postId, username: $username, text: $text) {
+      id
+      postId
+      username
+      text
+    }
+  }
+`;

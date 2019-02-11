@@ -16,11 +16,11 @@ const getPosts = async (_, { category, offset = 0, limit }, { Post }) => {
     posts.limit(limit)
   }
 
-  return posts.populate('comments')
+  return posts
 }
 
 const getPost = (_, { id }, { Post }) => {
-  return Post.findById(id)
+  return Post.findById(id).populate('comments')
 }
 
 const addPost = async (root, attrs, { Post }) => {

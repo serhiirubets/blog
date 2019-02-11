@@ -192,7 +192,7 @@ class PostPage extends Component {
                       </Button>
                   </p>
 
-                  <Comments comments={comments} />
+                  <Comments comments={comments} commentId={id} />
                 </article>
               );
             }}

@@ -24,6 +24,8 @@ exports.typeDefs = `
   }
 
   type PostComment {
+    id: ID
+    postId: ID
     username: String
     text: String
   }
