@@ -82,7 +82,7 @@ class PostPage extends Component {
     this.props.client.mutate({
       mutation: UNLIKE_POST,
       variables: { id },
-      update: (cache, { data: { addTodo } }) => {
+      update: (cache) => {
         const { getPost } = cache.readQuery({
           query: GET_POST,
           variables: { id }

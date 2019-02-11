@@ -10,6 +10,7 @@ export const GET_POST = gql`
         id
         username
         text
+        createdAt
       }
     }
   }

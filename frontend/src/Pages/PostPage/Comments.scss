@@ -1,8 +1,9 @@
-.comments {
+.commentForm {
   width: 60%;
   margin: auto;
   display: flex;
   flex-direction: column;
+  margin-bottom: 60px;
 
   .field {
     margin-bottom: 15px;
@@ -23,5 +24,53 @@
 
   button:first-child {
     margin-right: 20px;
+  }
+}
+
+.comments {
+  border: 1px solid #51d6b2;
+  padding-left: 0;
+  padding: 20px;
+  list-style-type: none;
+
+  div {
+    background: rgba(#cc61616b, 0.4);
+    padding: 10px 15px;
+  }
+
+  li {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.commentsTitle {
+  text-align: center;
+}
+
+.checkboxInner {
+  display: flex;
+  justify-content: center;
+  width: 390px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: relative;
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #51d6b2;
+
+  i {
+    position: absolute;
+    color: #51d6b2;
+    font-size: 20px;
+    top: -2px;
+    left: -2px;
   }
 }

@@ -28,6 +28,7 @@ exports.typeDefs = `
     postId: ID
     username: String
     text: String
+    createdAt: String
   }
 
   type Query {
